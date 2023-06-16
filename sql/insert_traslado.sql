@@ -1,0 +1,1 @@
+INSERT INTO `traslado` (`trasladoID`, `razonTraslado`) VALUES (NULL, 'Venta'), (NULL, 'Traslado a semillas'), (NULL, 'Traslado a plántulas'), (NULL, 'Traslado a plantas'), (NULL, 'Traslado de plantas madres'), (NULL, 'Donación recibida'), (NULL, 'Comprada'), (NULL, 'Colecta '),(NULL, 'Donación enviada'), (NULL, 'Muerte'), (NULL, 'Robo');

@@ -1,0 +1,29 @@
+<%- include('includes/header.ejs') %>
+<%- include('includes/navbar.ejs') %>
+	<%- include('includes/sidebar.ejs') %>
+		
+	    <br>
+        <div class="col-11">
+        <h1>Registrar zona</h1>
+        <div class="container">
+        <br>
+        <br>
+
+        <form action="zonas" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+            <div class="form-row">
+            <div class="form-group col-md-12">
+                    <label for="Nombre">Nombre la zona</label>
+                    <input type="text" class="form-control" name="nombreZona" placeholder="Nombre la zona">
+            </div>
+            <br>
+            <br>
+            <div class="form-group col-md-3">
+            <button type="submit" class="btn btn-secondary">Cancelar</button>    
+            <input type="submit" name="enviar"  class="btn btn-primary" value="Registrar">
+            
+            </div>
+        </form>
+
+	<%- include('includes/endcontainer.ejs') %>
+<%- include('includes/footer.ejs') %>

@@ -1,0 +1,46 @@
+<%- include('includes/header.ejs') %>
+    <%- include('includes/navbar.ejs') %>
+	<%- include('includes/sidebar.ejs') %>
+
+		<% if (error !== false) { %>
+		  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong> <%- error %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+          </div>  
+          
+        <% } %> 
+        <h1><%= titulo %></h1>
+		<br>
+		<form action="new" method="POST">
+		<input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+		<label for="Nombre">Nombre completo</label>
+		<br>
+		<input type="text" name="nombre" class="form-control" required>
+		<br>
+		<label for="correo">Correo electrónico</label>
+		<br>
+		<input type="text" name="correo" class="form-control" required>
+		<br>
+		<label for="rol">Rol</label>
+        <br>
+        <select id="inputState" class="form-control" name="rol">
+			<%for(let rol of roles) {%>
+                    <option value="<%= rol.rollID %>"><%= rol.rol %></option>
+            <%}%>
+        </select>
+        <br>
+		<label for="contrasena">Contraseña</label>
+        <input type="password" name="contrasena" class="form-control" minlength="8" required >
+        <br>
+		<div class="form-group ">
+            <a href="/usuarios" type="submit" class="btn btn-secondary">Cancelar</a>    
+            <input type="submit" name="enviar"  class="btn btn-primary" value="Registrar"> 
+        </div>
+		</form>
+
+	<%- include('includes/endcontainer.ejs') %>
+
+
+<%- include('includes/footer.ejs') %>

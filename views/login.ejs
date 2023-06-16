@@ -1,0 +1,44 @@
+<%- include('includes/header.ejs') %>
+
+  <div class="container">
+    <br>
+	<% if (error !== false) { %>
+		 <div class="alert alert-danger alert-dismissible fade show" role="alert">
+         <strong> <%- error %>
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+         </div>  
+          
+     <% } %> 
+     <h1><%= titulo %></h1>
+
+    <div class="mx-auto" style="width: 500px;">
+      <div class="card" style="width: 30rem;">
+        <img src="/img/LOGO_DSI.svg" class="card-img-top" alt="Logo DSI">
+        <div class="card-body">
+          <h5 class="card-title">Inicia Sesión</h5>
+          <p class="card-text">
+            <form action="login" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+              <div class="form-group">
+                <label for="correo">Correo electronico</label>
+                <input type="email" class="form-control"  placeholder="Correo electronico" name="correo" required>
+                <br>
+                <label for="contrasena">Contraseña</label>
+                <input type="password" class="form-control"  name="contrasena" placeholder="Contraseña" required>
+              </div>
+              <br>
+              <input type="submit" name="enviar" value="Iniciar Sesión" class="btn btn-primary">
+            </form>
+          </p>
+  
+        </div>
+      </div>
+    </div>  
+  </div>
+  <br>
+  <br>
+
+
+<%- include('includes/footer.ejs') %>

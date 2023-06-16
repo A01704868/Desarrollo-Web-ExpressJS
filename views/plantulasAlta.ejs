@@ -1,0 +1,47 @@
+<%- include('includes/header.ejs') %>
+<%- include('includes/navbar.ejs') %>
+	<%- include('includes/sidebar.ejs') %>
+    <div class="col-11">
+        <h1><%=titulo%></h1>
+    <div class="container">
+
+
+        <br>
+        <br>
+
+        <form action="plantulas-alta" method="POST"> 
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputState">Nombre científico</label>
+                        <select id="inputState" class="form-control" name="especie">
+                            <%for(let especie of especies) {%>
+                                <option value="<%= especie.EspID %>"><%= especie.NombreEsp %></option>
+                            <%}%>
+                        </select>
+                </div>
+                
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputState">Origen de Plantula</label>
+                            <select id="inputState" class="form-control" name="razon">
+                                <option value="7">Reproducida</option>
+                                <option value="6">Adquirida</option>
+                            </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="disabledTextInput"> Cantidad</label>
+                    <input type="number" id="disabledTextInput" class="form-control" name="cantidad"
+                        placeholder="Introduce un numero">
+                </div>
+            </div>
+            <br>
+            <div >
+                <a class="btn btn-secondary" href="/">Cancelar</a>
+                <input type="submit" name="enviar" class="btn btn-success" value="Alta"> 
+            </div>
+        </form>
+
+	<%- include('includes/endcontainer.ejs') %>
+<%- include('includes/footer.ejs') %>

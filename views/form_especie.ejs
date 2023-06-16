@@ -1,0 +1,39 @@
+<%- include('includes/header.ejs') %>
+<%- include('includes/navbar.ejs') %>
+	<%- include('includes/sidebar.ejs') %>
+		
+	    <br>
+        <div class="col-11">
+        <h1>Registrar especie</h1>
+        <div class="container">
+        <br>
+        <br>
+
+        <form action="especies" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+            <div class="form-row">
+            <div class="form-group col-md-12">
+                    <label for="ID">Identificador de la especie</label>
+                    <input type="text" class="form-control" name="EspID" placeholder="Identificador de la especie">
+                    <br>
+                    <label for="Nombre">Nombre científico</label>
+                    <input type="text" class="form-control" name="NombreEsp" placeholder="Nombre científico">
+                    <br>
+                    <label for="Nombre">Foto de la especie</label>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" name="imagen">
+                      <label class="custom-file-label" for="customFile">Subir Imagen</label>
+                    </div>
+            </div>
+            <br>
+            <br>
+            <div class="form-group col-md-3">
+            <br>
+            <a class="btn btn-secondary" href="/especies">Cancelar</a>  
+            <input type="submit" name="enviar"  class="btn btn-primary" value="Registrar">
+            
+            </div>
+        </form>
+
+	<%- include('includes/endcontainer.ejs') %>
+<%- include('includes/footer.ejs') %>

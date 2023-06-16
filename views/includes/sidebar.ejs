@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-2"  id="contentside">
+      <div class="sidebar">
+                <a href="#plantaMadreSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Plantas Madre</a>
+                <ul class="collapse lisst-unstyled" id="plantaMadreSubMenu">
+                    <a href="/inventarios/plantasMadreAlta">Dar de Alta</a>
+                    <a href="/inventarios/plantasMadreBaja">Dar de Baja</a>
+                </ul>
+
+                <a href="#plantaSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Plantas</a>
+                <ul class="collapse lisst-unstyled" id="plantaSubMenu">
+                    <a href="/inventarios/plantasAlta">Dar de Alta</a>
+                    <a href="/inventarios/plantasBaja">Dar de Baja</a>
+                </ul>
+                
+                <a href="#plantulasSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> Plantulas</a>
+                <ul class="collapse lisst-unstyled" id="plantulasSubMenu">
+                    <a href="/inventarios/plantulas-alta">Dar de Alta</a>
+                    <a href="/inventarios/plantulas-baja">Dar de Baja</a>
+                </ul>
+                
+                <a href="#semillaSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> Semillas</a>
+                <ul class="collapse lisst-unstyled" id="semillaSubMenu">
+                    <a href="/inventarios/semillasAlta">Dar de Alta</a>
+                    <a href="/inventarios/semillasBaja">Dar de Baja</a>
+                </ul>  
+
+        <% for( let p of permisos){  
+            if (p.permisosID === 1) { %>
+            <a href="/usuarios/">Registrar Personal</a>
+            <a href="/zonas">Registrar Zona</a>
+            <a href="/especies">Registrar Especie</a>
+            <% } 
+         } %>
+        
+    </div>
+    </div>
+    <div class="col-10">
+        <br>
+        <div class="col-11">
+        <div class="container">

@@ -1,0 +1,74 @@
+<%- include('includes/header.ejs') %>
+<%- include('includes/navbar.ejs') %>
+<%- include('includes/sidebar.ejs') %>
+	<input type="hidden" id="_csrf" name="_csrf" value="<%= csrfToken %>" >
+
+	<div class="form-outline">
+		<input type="search" id="buscar" class="form-control" oninput="buscar()" placeholder="Buscar"
+		aria-label="Search" />
+	  </div>
+
+	<br>
+		
+	<div class="container-fluid">
+		<div class="row justify-content-around" id="lista_tarjetas">
+			<%for (let tarjeta of tarjetas){%>
+				<div class="col-auto">
+					<div class="card border-success" style="width: 18rem;">
+						<img src="<%=tarjeta.imagen%>" class="card-img-top" alt="...">
+						<div class="card-body text-success">
+							<h5 class="card-title"><%=tarjeta.NombreEsp%></h5>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item"># de Plantas Madre: <%=tarjeta.cantidadPlantasMadre%></li>
+								<li class="list-group-item"># de Plantas: <%=tarjeta.cantidadPlantas%></li>
+								<li class="list-group-item"># de lotes de Plantulas: <%=tarjeta.cantidadLotesPlantulas%></li>
+								<li class="list-group-item"># de lotes de Semillas: <%=tarjeta.cantidadLotesSemillas%></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			<%}%>
+		</div>
+	</div>
+
+	<%- include('includes/endcontainer.ejs') %>
+<%- include('includes/footer.ejs') %>
+
+
+<script>
+	const buscar = async () =>{
+		let criterio = document.getElementById('buscar').value;
+
+		fetch('/'+criterio, {// fetch es un metodo de javascript
+            method: 'GET',
+            headers: {
+                //'Content-Type': 'application/json',
+            },
+        }).then(result => {
+            return result.json(); //Regresa otra promesa
+        }).then(data => {
+            //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+            console.log(data);
+            let html = '';
+            for (let tarjeta of data.tarjetas){
+                html += '<div class="col-auto">' +
+							'<div class="card border-success" style="width: 18rem;">' +
+								'<img src="'+tarjeta.imagen+'" class="card-img-top" alt="...">' +
+								'<div class="card-body text-success">' +
+									'<h5 class="card-title">'+tarjeta.NombreEsp+'</h5>' +
+									'<ul class="list-group list-group-flush">' +
+										'<li class="list-group-item"># de Plantas Madre: ' + tarjeta.cantidadPlantasMadre+'</li>' +
+										'<li class="list-group-item"># de Plantas: ' + tarjeta.cantidadPlantas +'</li>' +
+										'<li class="list-group-item"># de lotes de Plantulas: '+ tarjeta.cantidadLotesPlantulas + '</li>' +
+										'<li class="list-group-item"># de lotes de Semillas: '+ tarjeta.cantidadLotesSemillas + '</li>' +
+									'</ul>' +
+								'</div>' +
+							'</div>' +
+						'</div>';
+            }
+            document.getElementById('lista_tarjetas').innerHTML = html;
+        }).catch(err => {
+            console.log(err);
+        });
+	}
+</script>

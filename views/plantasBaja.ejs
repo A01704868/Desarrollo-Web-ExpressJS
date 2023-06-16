@@ -1,0 +1,122 @@
+<%- include('includes/header.ejs') %>
+<%- include('includes/navbar.ejs') %>
+	<%- include('includes/sidebar.ejs') %>
+    <div class="col-11">
+        <h1 class="text-danger"><%=titulo%></h1>
+    <div class="container">
+
+        <br>
+        <br>
+
+        <div class="input-group md-form form-sm form-2 pl-0 ">
+            <input type="hidden" id="_csrf" name="_csrf" value="<%= csrfToken %>" >
+            <div class="table-responsive" id="lista_especie">
+                <table class="table table-hover table-condensed table-bordered" >
+                      <thead class="bg-success">
+                       <tr>
+                        <th scope="col">ID Minimo</th>
+                           <th scope="col">ID Maximo</th>
+                           <th scope="col">Total</th>
+                       </tr>
+                      </thead>
+                      <tbody>
+                           <tr>
+                                <td><%=info[0].minimo%></td>
+                                <td><%=info[0].maximo%></td>
+                                <td><%=info[0].total%></td>
+                           </tr>
+                     </tbody>
+                </table>
+            </div>  
+        <br>
+
+        <form action ="plantasBaja" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputState">Seleccion</label>
+                    <select id="inputState" class="form-control" onchange="search()">
+                        <%for(let especie of especies) {%>
+                            <option value="<%= especie.EspID %>"><%= especie.NombreEsp %></option>
+                        <%}%>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="inputState">Fecha</label>
+                    <input type="search" id="buscar" class="form-control" oninput="search()" placeholder="Buscar Fecha" aria-label="Search"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputState">Razón de baja</label>
+                            <select id="inputState" class="form-control" name="razon">
+                                <option value="9">Muerte</option>
+                                <option value="8">Donacion otorgada</option>
+                                <option value="1">Venta</option>
+                                <option value="10">Robo</option>
+                            </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="disabledTextInput">Minimo</label>
+                    <input type="text" id="disabledTextInput" class="form-control" placeholder="Rango Minimo de IDs" name="minimo">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="disabledTextInput">Maximo</label>
+                    <input type="text" id="disabledTextInput" class="form-control" placeholder="Rango Maximo de IDs" name="maximo">
+                </div>
+            </div>
+            <br>
+            <div >
+                <a class="btn btn-secondary" href="/">Cancelar</a>
+                <button class="btn btn-danger" type="submit">Baja</button>
+            </div>
+        </form>
+
+	<%- include('includes/endcontainer.ejs') %>
+<%- include('includes/footer.ejs') %>
+
+
+<script>
+    const search = async () =>{
+		let especie = document.getElementById('buscar').value;
+
+        let fecha = document.getElementById('inputState').value;
+
+		fetch('/inventarios/plantasBaja/'+fecha+'&'+especie, {// fetch es un metodo de javascript
+            method: 'GET',
+            headers: {
+                //'Content-Type': 'application/json',
+            },
+        }).then(result => {
+            return result.json(); //Regresa otra promesa
+        }).then(data => {
+            //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+            let html = '';
+
+            html += '<div class="table-responsive" id="lista_especie">' +
+                       '<table class="table table-hover table-condensed table-bordered" >' +
+                        '<thead class="bg-success">' +
+                            '<tr>' +
+                                '<th scope="col">ID Minimo</th>' +
+                                '<th scope="col">ID Maximo</th>' +
+                                '<th scope="col">Total</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' +
+                           '<tr>' +
+                                '<td>'+data.info[0].minimo+'</td>' +
+                                '<td>'+data.info[0].maximo+'</td>' +
+                                '<td>'+data.info[0].total+'</td>' +
+                           '</tr>' +
+                     '</tbody>' +
+                '</table>' +
+            '</div>';
+            document.getElementById('lista_especie').innerHTML = html;
+        }).catch(err => {
+            console.log(err);
+        });
+	}
+
+</script>
